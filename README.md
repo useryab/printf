@@ -124,3 +124,26 @@ This myPrintf function is a simplified version that handles only integers (%d), 
 ## Other Specifiers:
 
 %%: Percent sign (literal %)
+
+#### Use & Examples
+
+
+------------
+
+###### Specifiers
+
+Specifier                |Output                        |Examples |
+|----------------|-------------------------------|-----------------------------|
+| `c` | Character | y |
+| `d` or `i` | Signed integer | 1024, -1024 |
+| `s` | String of characters | Hello Alx |
+| `b` | Binary Representation of unsigned integer | 01010110 |
+| `u` | Unsigned integer | 1024 |
+| `o` | Unsigned octal | 432 |
+| `x` | Unsigned hexadecimal integer | 3ca |
+| `X` | Unsigned hexadecimal integer (uppercase) | 3CA |
+| `S` | String with hex-ascii value replacing special chars | \x0A\x0A |
+| `p` | Pointer address | 0x403212 |
+| `r` | Reversed string of characters | dlroW olleH |
+| `R` | ROT13 Translation of string | Uryyb |
+
