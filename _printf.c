@@ -12,8 +12,9 @@ int _printf(const char *format, ...)
 	int numBytesWritten = 0, len;
 	va_list args;
 
+	if (format == NULL)
+		return (-1);
 	va_start(args, format);
-
 	while (*format)
 	{
 		if (*format == '%')
