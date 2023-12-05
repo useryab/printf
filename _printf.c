@@ -19,33 +19,45 @@ int _printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			switch (*++format)
-			{
-				case 'c':
-					numBytesWritten += c_print(args);
-					break;
-				case 'd':
-				case 'i':
-					len = _print_decimal(args, buffer);
-					write(1, buffer, len);
-					numBytesWritten += len;
-					break;
-				case 's':
-					numBytesWritten += s_print(args);
-					break;
-				case '%':
-					numBytesWritten += print_percent();
-					break;
-				default:    /* Handle invalid format specifiers*/
-					write(1, "Invalid format specifier", 24);
-					break;
-			}
-		} else
+			format++;
+			numBytesWritten += handle_format(&format, &args, buffer, &len);
+		}
+		else
 		{
 			numBytesWritten += write(1, format, 1);
 		}
-		 format++;
+		format++;
 	}
 	va_end(args);
 	return (numBytesWritten);
 }
+/**
+ * handle_format - function that handles format specifiers
+ * @format: list of arguments(format specifiers)
+ * @args: optional arguments
+ * @buffer: to store the string
+ * @len: length
+ * Return: number of bytes printed
+ */
+int handle_format(const char **format, va_list *args, char *buffer, int *len)
+{
+	switch (**format)
+	{
+		case 'c': return c_print(*args);
+		case 'd':
+		case 'i':
+			  *len = _print_decimal(*args, buffer);
+			  write(1, buffer, *len);
+				return (*len);
+		case 's': return s_print(*args);
+		case '%': return print_percent();
+		case 'p': return _print_pointer(args, buffer);
+		case 'x': return x_print(args);
+		case 'u': return u_print(*args);
+		case 'o': return o_print(*args);
+		default:
+			  write(1, "Invalid format specifier", 24);
+				return (0);
+	}
+}
+
